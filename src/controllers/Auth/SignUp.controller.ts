@@ -1,9 +1,9 @@
 import { SignUpInterface } from "../../interface/auth.interface";
 
 export class SignupController implements SignUpInterface {
-    constructor() {
+        constructor() {
     }
-    signup(username: string, password: string): void {
-        console.log(`User ${username} signed up.`);
+    signup(): any {
+        console.log(`User  signed up.`);
     }
 }

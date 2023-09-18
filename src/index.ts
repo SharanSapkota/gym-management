@@ -1,24 +1,15 @@
 import express from 'express';
-import { LoginController } from './controllers/Auth/Login.controller';
-
+import config from './config/index.config'
+import routes from './routes/index.route'
 
 const app = express();
 
 // Middleware to parse JSON request bodies
 app.use(express.json());
 
+const { PORT } = config
 // Define a simple route
-app.get('/', (req, res) => {
-  const a = new LoginController();
-  a.login('sharan');
+app.use('/api', routes)
+app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
 });
-
-// Define a route with route parameters
-app.get('/api/greet/:name', (req, res) => {
-  const { name } = req.params;
-  res.json({ message: `Hello, ${name}!` });
-});
-
-app.listen(3000, () => {
-    console.log(`Server is running on port ${3000}`);
-  });

@@ -1,5 +1,5 @@
 export interface AuthServiceInterface {
-    login(payload: any): void;
+    login(req: any, res: any): void;
 }
 
 export interface SignUpInterface {

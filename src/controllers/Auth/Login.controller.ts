@@ -4,9 +4,11 @@ import { AuthService } from "../../services/auth.service";
 export class LoginController implements AuthServiceInterface {
     authService = new AuthService()
     constructor() {
+        console.log(this.authService)
     }
 
-    login(payload: any) {
-        this.authService.postLogin('sharan', 'sharan')
+    login(req: Request, res: any): any {
+       const [success, error] = this.authService.postLogin('sharan', 'sharan')
+       res.json({success})
     }
 }
