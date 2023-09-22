@@ -1,13 +1,12 @@
-import {Router} from 'express';
-import { LoginController } from '../../controllers/Auth/Login.controller';
-import { SignupController } from '../../controllers/Auth/SignUp.controller';
-import { authenticate } from '../../middleware/auth.middleware';
+import {Request, Router} from 'express';
+import { LoginController } from '../../controllers/Login.controller';
+import { SignupController } from '../../controllers/SignUp.controller';
 
 const authRouter = Router();
 const loginController = new LoginController();
 const signupController = new SignupController()
 
-authRouter.get('/login', authenticate, loginController.login)
-authRouter.get('/signup', signupController.signup)
+authRouter.get('/login', (req: any, res) => loginController.login(req, res))
+authRouter.post('/signup', (req, res) => signupController.signup(req, res))
 
 export = authRouter

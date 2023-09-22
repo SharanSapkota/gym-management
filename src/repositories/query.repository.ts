@@ -5,7 +5,9 @@ export class QueryRepository {
     }
 
     async create(payload: any) {
-        this.db.create()
+        console.log('method not implemented')
+        console.log(payload)
+        // this.db.create()
     }
     async findOne(payload: any) {
         console.log('Method not implemented (Repository)!')

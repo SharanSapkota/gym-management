@@ -3,7 +3,8 @@ import mongoose from 'mongoose'
 
 export class MongoDB implements BaseDatabaseInterface {
     create: any = () => {
-        console.log('Method not implemented!')
+
+        // console.log('Method not implemented!')
     }
     find: any = () => {
         console.log('Method not implemented!')

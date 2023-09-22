@@ -6,6 +6,11 @@ export class AuthService {
     constructor() {
         this.database = new QueryRepository(new MongoDB());
     }
+
+    createUser(payload) {
+        this.database.create(payload)
+        // console.log(payload) 
+    }
     
     postLogin (username: string, password: string) {
         this.database.create('sharan', 'sharan');

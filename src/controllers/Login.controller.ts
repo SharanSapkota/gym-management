@@ -1,10 +1,9 @@
-import { AuthServiceInterface } from "../../interface/auth.interface";
-import { AuthService } from "../../services/auth.service";
+import { AuthServiceInterface } from "../interface/auth.interface";
+import { AuthService } from "../services/auth.service";
 
 export class LoginController implements AuthServiceInterface {
     authService = new AuthService()
     constructor() {
-        console.log(this.authService)
     }
 
     login(req: Request, res: any): any {
