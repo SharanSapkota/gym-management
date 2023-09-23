@@ -1,6 +1,7 @@
 export interface AuthServiceInterface {
     login(req: any, res: any): void;
-    signup(username: string, password: string): void
+    signup(username: string, password: string): void;
+    createRole(req: any, res: any): void;
 }
 
 
