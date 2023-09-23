@@ -1,5 +1,6 @@
 import { MongoDB } from "../database/mongodb";
 import { QueryRepository } from "../repositories/query.repository";
+import {User} from '../models/user.schema'
 
 export class AuthService {
     private database: any
@@ -7,9 +8,14 @@ export class AuthService {
         this.database = new QueryRepository(new MongoDB());
     }
 
-    createUser(payload) {
-        this.database.create(payload)
-        // console.log(payload) 
+    async createUser(payload) {
+        const createdUser = await this.database.create(User, payload)
+        return createdUser
+    }
+
+    async getAllUsers() {
+        const allUsers = await this.database.findAll(User)
+        return allUsers;
     }
     
     postLogin (username: string, password: string) {

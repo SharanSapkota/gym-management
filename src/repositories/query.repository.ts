@@ -4,15 +4,14 @@ export class QueryRepository {
         this.db = db
     }
 
-    async create(payload: any) {
-        console.log('method not implemented')
-        console.log(payload)
-        // this.db.create()
+    async create(model, payload: any) {
+        return await this.db.create(model, payload)
     }
     async findOne(payload: any) {
         console.log('Method not implemented (Repository)!')
     }
-    async find(payload: any) {
-        console.log('Method not implemented (Repository)!')
+    async findAll(model, query = {}) {
+       const findAll = await this.db.findAll(model, query)
+       return findAll;
     }
 }

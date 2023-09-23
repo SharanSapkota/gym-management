@@ -1,13 +1,15 @@
 import { BaseDatabaseInterface } from "../interface/mongo.database";
-import mongoose from 'mongoose'
 
 export class MongoDB implements BaseDatabaseInterface {
-    create: any = () => {
-
-        // console.log('Method not implemented!')
+    constructor() {}
+    create: any = async (model, payload) => {
+        const createData = new model(payload);
+        const savedResult = await createData.save()
+        return savedResult;
     }
-    find: any = () => {
-        console.log('Method not implemented!')
+    findAll: any = async (model, query = {}) => {
+        const findAll = await model.find(query)
+        return findAll;
     }
     findOne: any = () => {
         console.log('Method not implemented!')
