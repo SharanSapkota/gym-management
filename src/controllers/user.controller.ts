@@ -2,7 +2,7 @@ import { AuthServiceInterface } from "../interface/auth.interface"
 import { AuthService } from "../services/auth.service";
 
 export class UserController implements AuthServiceInterface {
-    authService = new AuthService()
+    authService: AuthService
     constructor() {
     }
 
@@ -10,6 +10,7 @@ export class UserController implements AuthServiceInterface {
        const [success, error] = this.authService.postLogin('sharan', 'sharan')
        res.json({success})
     }
+
     async signup(req, res): Promise<any> {
         try{
             const { body } = req;
@@ -20,19 +21,23 @@ export class UserController implements AuthServiceInterface {
             res.status(400)
         }
     }
+
     async getAllUsers(req, res): Promise<any> {
        const allUsers = await this.authService.getAllUsers()
         res.json({allUsers})  
     }
+
     async createRole(req, res) {
         console.log(req.body)
         const { body } = req;
         const addedRole = await this.authService.createRole(body)
-        res.status(200).json({data: addedRole, success: true})
-        
+        res.status(200).json({data: addedRole, success: true})    
     }
+
     async getAllRoles(req, res) {
         const getAllRoles = await this.authService.getAllRoles()
         res.status(200).json({data: getAllRoles, success: true})
     }
+
 }
+
