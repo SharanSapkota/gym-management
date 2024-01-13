@@ -6,3 +6,4 @@ const app = Router();
 app.use('/user', authRouter)
 
 export default app
+
