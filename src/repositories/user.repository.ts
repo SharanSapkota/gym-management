@@ -8,7 +8,9 @@ export class userRepository extends BaseRepository {
     }
 
     async create(model, payload: any) {
-        return await this.model.create(model, payload)
+        const createData = new this.model(payload);
+        const savedResult = await createData.save()
+        return savedResult;
     }
     async findOne(payload: any) {
         console.log('Method not implemented (Repository)!')
