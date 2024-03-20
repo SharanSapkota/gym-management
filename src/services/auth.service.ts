@@ -1,36 +1,35 @@
-import { MongoDB } from "../database/mongodb";
-import { QueryRepository } from "../repositories/query.repository";
+
 import {User} from '../models/user.schema'
 import { Role } from "../models/userRole.schema";
+import { userRepository } from "../repositories/user.repository";
 
 export class AuthService {
-    private database: any
+    private userRepository: any
     constructor() {
-        this.database = new QueryRepository(new MongoDB());
+        this.userRepository = new userRepository(User);
     }
-
     async createUser(payload) {
-        const createdUser = await this.database.create(User, payload)
+        const createdUser = await this.userRepository.create(User, payload)
         return createdUser
     }
 
     async getAllUsers() {
-        const allUsers = await this.database.findAll(User)
+        const allUsers = await this.userRepository.findAll(User)
         return allUsers;
     }
     
-    postLogin (username: string, password: string) {
-        this.database.create('sharan', 'sharan');
+    postLogin (payload) {
+        this.userRepository.create('sharan', 'sharan');
         return [true, false]
     }
 
     async createRole(payload) {
-        const createdRole = await this.database.create(Role, payload);
+        const createdRole = await this.userRepository.create(Role, payload);
         return createdRole;
     }
 
     async getAllRoles(query = {}){
-        const getAllRoles = await this.database.findAll(Role, query)
+        const getAllRoles = await this.userRepository.findAll(Role, query)
         return getAllRoles;
     } 
 }
