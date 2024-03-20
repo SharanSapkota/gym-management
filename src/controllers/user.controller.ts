@@ -7,7 +7,8 @@ export class UserController implements AuthServiceInterface {
     }
 
     login(req: Request, res: any): any {
-       const [success, error] = this.authService.postLogin('sharan', 'sharan')
+        const { body } = req;
+       const [success, error] = this.authService.postLogin(body)
        res.json({success})
     }
 
