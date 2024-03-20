@@ -4,12 +4,10 @@ const employeeSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
     },
-    hireDate: Date,    // Date of hire
+    hireDate: Date,
     position: String,
-    department: String, // Employee department
+    department: String,
     isActive: Boolean
 });
 
-const Employee = mongoose.model('Employee', employeeSchema);
-
-module.exports = Employee;
+export const Employee = mongoose.model('Employee', employeeSchema);

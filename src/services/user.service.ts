@@ -1,35 +1,38 @@
-import { MongoDB } from "../database/mongodb";
-import { QueryRepository } from "../repositories/query.repository";
+import { User } from "../models/user.schema";
+import { userRepository } from "../repositories/user.repository";
+import { BaseService } from "./base.service";
 
-export class UserService {
-    private database: any;
+interface IUserService {
+    create(user: any): Promise<any>;
+    getById(userId: string): Promise<any>;
+};
+
+export class UserService extends BaseService implements IUserService {
+    private userRepository: any;
 
     constructor() {
-        this.database = new QueryRepository(new MongoDB());
+        super(new userRepository())
+        this.userRepository = new userRepository();
     }
 
-    // Create a new user
-    async createUser(user: any): Promise<any> {
+    async create(user: any): Promise<any> {
         try {
-            // const newUser = new User(user);
-            const savedUser = await this.database.create(user);
+            const savedUser = await this.userRepository.create(user);
             return savedUser;
         } catch (error) {
             console.error("Error creating user:", error);
-            throw error; // Handle or log the error as needed
+            throw error;
         }
     }
 
-    // Get a user by ID
-    async getUserById(userId: string): Promise<any | null> {
+    async getById(userId: string): Promise<any | null> {
         try {
-            const user = await this.database.findById(userId);
+            const user = await this.userRepository.findById(userId);
             return user;
         } catch (error) {
             console.error("Error getting user by ID:", error);
-            throw error; // Handle or log the error as needed
+            throw error;
         }
     }
 
-    // Add more methods for user-related operations as needed
 }

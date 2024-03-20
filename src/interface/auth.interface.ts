@@ -8,3 +8,4 @@ export interface AuthServiceInterface {
 export interface SignUpInterface {
     signup(username: string, password: string): void
 }
+
