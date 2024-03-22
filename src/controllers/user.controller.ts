@@ -1,3 +1,4 @@
+import { Request, Response } from "express";
 import { AuthServiceInterface } from "../interface/auth.interface"
 import { UserControllerInterface } from "../interface/user.interface";
 import { AuthService } from "../services/auth.service";
@@ -8,7 +9,7 @@ export class UserController implements UserControllerInterface {
     constructor() {
     }
 
-    async create(req, res): Promise<any> {
+    async create(req: Request, res: Response): Promise<any> {
         try {
             const { body } = req;
             const newSignUp = await this.authService.create(body)
@@ -19,7 +20,7 @@ export class UserController implements UserControllerInterface {
         }
     }
 
-    async findAll(req, res): Promise<any> {
+    async findAll(req: Request, res: Response): Promise<any> {
         try{
             const allUsers = await this.authService.findAll()
             res.json({allUsers})  

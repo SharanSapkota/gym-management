@@ -1,15 +1,28 @@
-FROM node:18-alpine 
 
+CMD ["node", "./build/index.js"]
+
+FROM node:18-bullseye-slim AS base
+
+# Install required dependecies
+FROM base as dependencies
 WORKDIR /app
-
-COPY package.json ./
-
+COPY package*.json ./
 RUN npm install
 
-COPY  . .
+# Build Application
+FROM base AS builder
+WORKDIR /app
+COPY --from=dependencies /app/node_modules ./node_modules
+COPY . .
+RUN npm run build
 
-ENV PORT=8080
+# Application runner
+FROM base AS runner
+WORKDIR /app
+COPY --from=builder /app/node_modules ./node_modules
+COPY --from=builder /app/.env .env
 
-EXPOSE 8080
+COPY --from=builder /app/dist ./dist
+CMD ["node", "dist/migrate.js"]
 
-CMD ["npm", "run", "production"]
+

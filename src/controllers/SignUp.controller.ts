@@ -1,3 +1,4 @@
+import { Request } from "express";
 import { SignUpInterface } from "../interface/auth.interface";
 import { AuthService } from "../services/auth.service";
 
@@ -7,9 +8,7 @@ export class SignupController implements SignUpInterface {
         constructor() {
             this.authService = new AuthService()
     }
-    signup(req, res): any {
-        const {body} = req;
-        this.authService.createUser(body)
-        console.log(`User  signed up.`);
+    signup() {
+        return 'Method not implemented!'
     }
 }
