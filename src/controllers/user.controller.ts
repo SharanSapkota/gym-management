@@ -1,31 +1,40 @@
 import { Request, Response } from "express";
-import { AuthServiceInterface } from "../interface/auth.interface"
 import { UserControllerInterface } from "../interface/user.interface";
-import { AuthService } from "../services/auth.service";
 import { UserService } from "../services/user.service";
+import { hashPassword } from "../adapters/encrytion";
+import httpResponse from "../helper/httpResponse";
 
 export class UserController implements UserControllerInterface {
-    authService: UserService
+    userService: UserService
     constructor() {
     }
 
     async create(req: Request, res: Response): Promise<any> {
         try {
             const { body } = req;
-            const newSignUp = await this.authService.create(body)
-            res.status(200).json({data: newSignUp, success: true})
-            console.log(`User  signed up.`);
+            body.password = await hashPassword(body.password)
+            const data = await this.userService.create(body)
+            httpResponse.success(res, data)
         } catch(error) {
-            res.status(400)
+            httpResponse.badRequest(res, error)
         }
     }
 
     async findAll(req: Request, res: Response): Promise<any> {
         try{
-            const allUsers = await this.authService.findAll()
-            res.json({allUsers})  
+            const data = await this.userService.findAll()
+            httpResponse.success(res, data)
         } catch(error) {
-            res.status(400)
+            httpResponse.badRequest(res, error)
+        }
+    }
+
+    async login(req: Request, res: Response): Promise<any> {
+        try {
+            const loggedInUser = await this.userService.login(req.body)
+            httpResponse.success(res, loggedInUser)
+        } catch(error){
+            httpResponse.badRequest(res, error)
         }
     }
 

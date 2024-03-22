@@ -18,7 +18,7 @@ const userSchema = z.object({
   isUser: z.boolean().optional(),
 });
 
-function validateUser(req: Request, res: Response, next: NextFunction) {
+function validateUserSignup(req: Request, res: Response, next: NextFunction) {
   try {
     userSchema.parse(req.body);
     next();
@@ -27,4 +27,4 @@ function validateUser(req: Request, res: Response, next: NextFunction) {
   }
 }
 
-export { validateUser };
+export { validateUserSignup };
