@@ -1,4 +1,4 @@
-import { User } from "../models/user.schema";
+import { hashPassword } from "../adapters/encrytion";
 import { userRepository } from "../repositories/user.repository";
 import { BaseService } from "./base.service";
 
@@ -16,6 +16,7 @@ export class UserService extends BaseService implements IUserService {
     }
 
     async create(user: any): Promise<any> {
+        user.password = hashPassword(user.password);
         const savedUser = await this.userRepository.create(user);
         return savedUser;
     }
@@ -23,6 +24,10 @@ export class UserService extends BaseService implements IUserService {
     async getById(userId: string): Promise<any | null> {
         const user = await this.userRepository.findById(userId);
         return user;
+    }
+
+    async login(payload: string): Promise<any> {
+        const user = await this.userRepository.login(payload)
     }
 
 }
