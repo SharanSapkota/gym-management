@@ -1,6 +1,6 @@
 export class BaseRepository {
     model: any
-    constructor(model){
+    constructor(model: any){
         this.model = model
     }
 
@@ -10,7 +10,7 @@ export class BaseRepository {
         return savedResult;
     }
 
-    async findAll(model, query = {}) {
+    async findAll(model: any, query = {}) {
         const findAll = await this.model.findAll(model, query)
         return findAll;
      }

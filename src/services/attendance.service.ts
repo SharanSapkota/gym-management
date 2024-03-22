@@ -10,7 +10,7 @@ export class AuthService extends BaseService {
         super(new AttendanceRepository())
         this.attendanceRepository = new AttendanceRepository();
     }
-    async create(payload) {
+    async create(payload: any) {
         const createdUser = await this.attendanceRepository.create(User, payload)
         return createdUser
     }

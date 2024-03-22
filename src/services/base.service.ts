@@ -1,5 +1,5 @@
 export class BaseService {
-    constructor(repository){
+    constructor(repository: any){
 
     }
 

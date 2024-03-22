@@ -9,7 +9,7 @@ export class AuthService {
         this.userRepository = new userRepository();
     }
     
-    postLogin (payload) {
+    postLogin (payload: any) {
         this.userRepository.create('sharan', 'sharan');
         return [true, false]
     }
