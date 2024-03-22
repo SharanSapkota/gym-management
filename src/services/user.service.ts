@@ -16,23 +16,13 @@ export class UserService extends BaseService implements IUserService {
     }
 
     async create(user: any): Promise<any> {
-        try {
-            const savedUser = await this.userRepository.create(user);
-            return savedUser;
-        } catch (error) {
-            console.error("Error creating user:", error);
-            throw error;
-        }
+        const savedUser = await this.userRepository.create(user);
+        return savedUser;
     }
 
     async getById(userId: string): Promise<any | null> {
-        try {
-            const user = await this.userRepository.findById(userId);
-            return user;
-        } catch (error) {
-            console.error("Error getting user by ID:", error);
-            throw error;
-        }
+        const user = await this.userRepository.findById(userId);
+        return user;
     }
 
 }
