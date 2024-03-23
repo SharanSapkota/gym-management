@@ -16,7 +16,6 @@ export class UserService extends BaseService implements IUserService {
     }
 
     async create(user: any): Promise<any> {
-        user.password = hashPassword(user.password);
         const savedUser = await this.userRepository.create(user);
         return savedUser;
     }
@@ -28,6 +27,11 @@ export class UserService extends BaseService implements IUserService {
 
     async login(payload: string): Promise<any> {
         const user = await this.userRepository.login(payload)
+    }
+
+    async findAll() {
+        const allUsers = await this.userRepository.findAll();
+        return allUsers;
     }
 
 }

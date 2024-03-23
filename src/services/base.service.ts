@@ -3,9 +3,6 @@ export class BaseService {
 
     }
 
-    findAll() {
-        return "Method not Implemented!"
-    }
 
     DeleteById() {
         return "Method not Implemented!"
