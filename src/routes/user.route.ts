@@ -7,10 +7,10 @@ const userRouter = Router();
 const userController = new UserController();
 
 //LOGIN
-userRouter.post('/login', userController.login)
+userRouter.post('/login', (req, res) => userController.login(req, res))
 
-userRouter.post('/', authenticate, validateUserSignup, userController.create)
-userRouter.get('/', authenticate, userController.findAll)
+userRouter.post('/', validateUserSignup, (req, res) => userController.create(req,res))
+userRouter.get('/', (req, res) => userController.findAll(req, res))
 
 export = userRouter;
 
