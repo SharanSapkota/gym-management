@@ -1,5 +1,4 @@
 
-CMD ["node", "./build/index.js"]
 
 FROM node:18-bullseye-slim AS base
 
@@ -20,9 +19,8 @@ RUN npm run build
 FROM base AS runner
 WORKDIR /app
 COPY --from=builder /app/node_modules ./node_modules
-COPY --from=builder /app/.env .env
 
 COPY --from=builder /app/dist ./dist
-CMD ["node", "dist/migrate.js"]
+CMD ["node", "./build/index.js"]
 
 
